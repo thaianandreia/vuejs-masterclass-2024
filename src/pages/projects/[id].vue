@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-const route = useRoute()
+const route = useRoute('/projects/[id]')
 </script>
 <template>
   <div>
