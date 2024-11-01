@@ -7,15 +7,21 @@ const supabase = createClient(
   process.env.SERVICE_ROLE_KEY,
 )
 
-const seedProjects = async () => {
-  const name = faker.lorem.words(3)
-  const { data, error, status } = await supabase.from('projects').insert({
-    name: name,
-    slug: faker.helpers.slugify(name),
-    status: faker.helpers.arrayElement(['in-progress', 'completed']),
-    collaborators: faker.helpers.arrayElements([1, 2, 3]),
-  })
+const seedProjects = async numEntries => {
+  const projects = []
+  for (let index = 0; index < numEntries; index++) {
+    const name = faker.lorem.words(3)
+    projects.push({
+      name: name,
+      slug: faker.helpers.slugify(name),
+      status: faker.helpers.arrayElement(['in-progress', 'completed']),
+      collaborators: faker.helpers.arrayElements([1, 2, 3]),
+    })
+  }
+  const { data, error, status } = await supabase
+    .from('projects')
+    .insert(projects)
   console.log(data, status, error)
 }
 
-await seedProjects()
+await seedProjects(10)
