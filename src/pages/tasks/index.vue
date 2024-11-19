@@ -1,39 +1,15 @@
 <script setup lang="ts">
-import { supabase } from '@/lib/supabaseClient'
-import type { Tables } from '../../../database/database.types'
 import { type ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
-import type { QueryData } from '@supabase/supabase-js'
+import { tasksWithProjectsQuery } from '@/utils/supaQueries'
+import type { TasksWithProjects } from '@/utils/supaQueries'
 
 usePageStore().pageData.title = 'My Tasks'
 
-const tasksWithProjectsQuery = supabase.from('tasks').select(`
-    *,
-    projects (
-      id,
-      name,
-      slug
-    )
-  `)
-type TasksWithProjects = QueryData<typeof tasksWithProjectsQuery>
-
-const { data, error } = await tasksWithProjectsQuery
-if (error) throw error
-const tasksWithProjects: TasksWithProjects = data
-
-const tasks = ref<Tables<'tasks'>[] | null>(null)
+const tasks = ref<TasksWithProjects | null>(null)
 const getTasks = async () => {
-  const { data, error } = await supabase.from('tasks').select(`
-    *,
-    projects (
-      id,
-      name,
-      slug
-    )
-  `)
-
-  if (error) console.log(error)
-
+  const { data, error } = await tasksWithProjectsQuery
+  if (error) throw error
   tasks.value = data
 }
 
