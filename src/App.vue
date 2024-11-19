@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { Component } from 'lucide-vue-next'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <AuthLayout>
