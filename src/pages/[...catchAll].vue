@@ -1,6 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AppErrorPage from '@/components/appError/AppErrorPage.vue'
+usePageStore().pageData.title = ''
+</script>
+
 <template>
-  <div>
-    <h1>404 NOT FOUND</h1>
-  </div>
+  <AppErrorPage />
 </template>
