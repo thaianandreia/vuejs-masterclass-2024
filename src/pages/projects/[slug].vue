@@ -15,7 +15,8 @@ const getProject = async () => {
   if (error) throw error
   project.value = data
 }
-getProject()
+
+await getProject()
 </script>
 <template>
   <Table>
