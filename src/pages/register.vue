@@ -18,7 +18,13 @@ const signup = async () => {
 
   if (error) return console.log(error)
 
-  console.log(data)
+  if(data.user){
+    supabase.from('profiles').insert({
+      id: data.user.id,
+      username: formData.value.username,
+      full_name: formData.value.username + ' ' + formData.value.lastName,
+    })
+  }
 }
 </script>
 

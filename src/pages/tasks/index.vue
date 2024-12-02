@@ -12,6 +12,7 @@ const getTasks = async () => {
   tasks.value = data
 }
 
+
 await getTasks()
 </script>
 <template>
